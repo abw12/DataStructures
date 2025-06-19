@@ -1,0 +1,40 @@
+# IntelliJ IDEA project files
+.idea/
+*.iml
+*.iws
+
+# User-specific files
+*.ipr
+*.iws
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Maven / Gradle build output
+target/
+build/
+
+# Log files
+*.log
+
+# Compiled class files
+*.class
+
+# Generated files
+out/
+
+# Temporary files
+*.tmp
+*.temp
+
+# Ignore Eclipse files if you ever use Eclipse
+.project
+.classpath
+.settings/
+
+# Ignore node modules if using Node.js
+node_modules/
+
+# Ignore coverage reports
+coverage/
