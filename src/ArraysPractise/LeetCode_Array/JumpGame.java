@@ -11,31 +11,46 @@ public class JumpGame {
         System.out.println(jumpGame2(game1));
     }
 
+    //Same time complexity but perform a bit slower in worst case scenario.( runtime taken 2ms compare to 1ms in 1st approach)
+    //solve iterating in forward direction
+    private static boolean jumpGame1AnotherApproach(int[] nums{
+         int far = 0;
+         int goal = nums.length-1; //last index
+         for(int i=0; i < nums.length; i++){
+             if(i > far) return false; //gap we can't cross
+             far = Math.max(far,i+nums[i]);
+             if(far >= goal){
+                 return true;
+             }
+         }
+         return true; // array length 1 or we never hit a gap
+    }
+
     private static boolean jumpGame1(int[] game1){
         int l = game1.length;
         int goal = l-1;
         for(int i = l-2; i >=0 ; i--){
             if(i + game1[i] >= goal){
-                goal--;
+                goal=i;
             }
         }
         return goal == 0;
     }
 
     // {2,1,1,1,4}
-    private static int jumpGame2(int[] game2){
-        int l = game2.length;
-        int min_jumps=0;
-        int near=0,far=0; //near is min jump and far is max jump that can be taken form a particular index
-        while(far < l-1){
-            int farthest=0; //farthest i can got from current index
-            for(int i=near; i < far+1; i++){
-                farthest=Math.max(farthest,i + game2[i]);
+    private static int jumpGame2(int[] nums){
+        int len = nums.length;
+        int near=0;int far=0;int min_jumps=0;
+        //nums = [2,3,1,1,4]
+        while (far < len-1){ //break after 2 loops
+            int farthest =0;
+            for(int i=near;i < far+1 ; i++){
+                farthest=Math.max(farthest, i + nums[i]); //current index + jumps at current_index(nums[i])
             }
-            near=far+1;
-            far=farthest;
-            min_jumps++;
+            near=far+1; //1;3 -> after each iteration values
+            far=farthest; //2;4
+            min_jumps++; //1;2
         }
-        return min_jumps;
+        return min_jumps; //2
     }
 }

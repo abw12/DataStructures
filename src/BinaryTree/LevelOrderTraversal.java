@@ -20,7 +20,7 @@ public class LevelOrderTraversal {
         if(root == null) return answer;
         TreeNode currentNode= root;
         queue.add(currentNode);
-        while(queue.size() != 0){
+        while(!queue.isEmpty()){
             int level = queue.size();
             List<Integer> subList = new ArrayList<>();
 
