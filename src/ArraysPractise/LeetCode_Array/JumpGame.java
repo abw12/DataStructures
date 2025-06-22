@@ -13,7 +13,7 @@ public class JumpGame {
 
     //Same time complexity but perform a bit slower in worst case scenario.( runtime taken 2ms compare to 1ms in 1st approach)
     //solve iterating in forward direction
-    private static boolean jumpGame1AnotherApproach(int[] nums{
+    private static boolean jumpGame1AnotherApproach(int[] nums){
          int far = 0;
          int goal = nums.length-1; //last index
          for(int i=0; i < nums.length; i++){
