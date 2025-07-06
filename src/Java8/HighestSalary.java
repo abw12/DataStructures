@@ -73,7 +73,7 @@ public class HighestSalary {
         List<EmplooyeeData> data = Stream.of(new EmplooyeeData("Abhishek","Dev",60000,3),
                 new EmplooyeeData("Manali","Dev",80000,14),
                 new EmplooyeeData("Jashma","QA",50000,4),
-                new EmplooyeeData("Amit","QA",120000,3),
+                new EmplooyeeData("Amit","QA",120000, 3),
                 new EmplooyeeData("Manoj","Dev",160000,14),
                 new EmplooyeeData("Mahesh","Dev",260000,20),
                 new EmplooyeeData("Vishal","DevOps",160000,15),
@@ -102,6 +102,14 @@ public class HighestSalary {
                 .collect(Collectors.groupingBy(EmplooyeeData::getYearsOfExp, Collectors.toList()));
         System.out.println("Group By Exp: "+ groupByExp);
 
+        // Compute sum of salaries by department
+        Map<String, Double> salaryMapPerDept = data.stream()
+                .collect(Collectors.groupingBy(
+                                EmplooyeeData::getDept,
+                                Collectors.summingDouble(EmplooyeeData::getSalary)
+                        )
+                );
+
         //across all dept
         EmplooyeeData emplyeeWithMaxSalary = data.stream()
                 .max(Comparator.comparingDouble(EmplooyeeData::getSalary))
@@ -120,6 +128,7 @@ public class HighestSalary {
 
         //dept wise most exp employee
         Map<String, EmplooyeeData> byExp=data.stream().collect(
+
                 toMap(EmplooyeeData::getDept, Function.identity(), BinaryOperator.maxBy(Comparator.comparingInt(EmplooyeeData::getYearsOfExp)))
                 );
         //onlygrouping by name
@@ -128,7 +137,7 @@ public class HighestSalary {
         //fetching all employee name which does not start with "M"
        List<String> employeeName=data.stream()
                .filter(employee -> !employee.getName().startsWith("M"))
-               .map(employee -> employee.getName()).collect(Collectors.toList());
+               .map(EmplooyeeData::getName).collect(Collectors.toList());
 
        List<String>  empNames =  data.stream().filter(emp -> emp.getSalary() > 90000).map(emp -> emp.getName()).collect(Collectors.toList());
 

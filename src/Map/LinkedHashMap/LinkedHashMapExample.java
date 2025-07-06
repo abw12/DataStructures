@@ -9,6 +9,7 @@ public class LinkedHashMapExample {
     public static void main(String[] args) {
 
         Map<Integer,String> lhm = new LinkedHashMap<>(8,0.60f);
+//        Map<Integer,String> lhm = new TreeMap<>(); //will sort the map based on key (ascending order)
         lhm.put(1,"Abhishek");
         lhm.put(5,"Abhi");
         lhm.put(2,"Abhijit");
