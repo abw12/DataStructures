@@ -1,4 +1,4 @@
-package LeetCode_String;
+package LeetCode.Strings;
 
 /*1. Given an array of strings. For each string, return the least number of characters to be modified so that there are
 NO consecutive identical characters in any string. All strings are non-empty and contain only lowercase English letters a-z.

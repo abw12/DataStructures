@@ -23,11 +23,9 @@ public class Dog {
         // it with the dog classname so that equals method perform efficiently
         if (that == null || this.getClass() != that.getClass()) return false;
         //custom way to check the string name equality of the class dog.name
-        if( that instanceof Dog){
-            String objName=((Dog) that).getName();
-            return this.name.equals(objName);
-        }
-        return  false;
+        //Once you've confirmed the type, you can safely cast the Object to your class type to access its fields.
+        String objName = ((Dog) that).getName();
+        return this.name.equals(objName);
     }
 
     @Override
