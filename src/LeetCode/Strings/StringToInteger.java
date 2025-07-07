@@ -1,4 +1,4 @@
-package LeetCode_String;
+package LeetCode.Strings;
 
 //Medium level question
 
