@@ -6,6 +6,7 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import static java.util.stream.Collectors.groupingBy;
 import static java.util.stream.Collectors.toMap;
 
 class EmplooyeeData {
@@ -85,7 +86,7 @@ public class HighestSalary {
         //approach 1
         Comparator<EmplooyeeData> comapareBySalary=Comparator.comparing(EmplooyeeData::getSalary);
         Map<String, Optional<EmplooyeeData>> employeeMap=data.stream().collect(
-                Collectors.groupingBy(
+                groupingBy(
                         EmplooyeeData::getDept,
                         Collectors.reducing(BinaryOperator.maxBy(comapareBySalary))
                 )
@@ -99,12 +100,12 @@ public class HighestSalary {
 
         //another simple example of the groupingBy collectors
         Map<Integer, List<EmplooyeeData>> groupByExp = data.stream()
-                .collect(Collectors.groupingBy(EmplooyeeData::getYearsOfExp, Collectors.toList()));
+                .collect(groupingBy(EmplooyeeData::getYearsOfExp, Collectors.toList()));
         System.out.println("Group By Exp: "+ groupByExp);
 
         // Compute sum of salaries by department
         Map<String, Double> salaryMapPerDept = data.stream()
-                .collect(Collectors.groupingBy(
+                .collect(groupingBy(
                                 EmplooyeeData::getDept,
                                 Collectors.summingDouble(EmplooyeeData::getSalary)
                         )
@@ -132,7 +133,7 @@ public class HighestSalary {
                 toMap(EmplooyeeData::getDept, Function.identity(), BinaryOperator.maxBy(Comparator.comparingInt(EmplooyeeData::getYearsOfExp)))
                 );
         //onlygrouping by name
-        Map<String,List<EmplooyeeData>> groupByName = data.stream().collect(Collectors.groupingBy(EmplooyeeData::getName));
+        Map<String,List<EmplooyeeData>> groupByName = data.stream().collect(groupingBy(EmplooyeeData::getName));
 
         //fetching all employee name which does not start with "M"
        List<String> employeeName=data.stream()
@@ -149,6 +150,17 @@ public class HighestSalary {
         //sum of salary in dept dev
         Double sumOfSalaryInAllDept =data.stream().reduce(0.0,(partialValue,emp) -> partialValue + emp.getSalary() , Double::sum);
         System.out.println("Sum "+ sumOfSalaryInAllDept);
+
+        //Q) Given a list of Employee objects, create a Map where the key is the employee's department and the value is the number of employees
+        // in that department.
+
+        Map<String,Long> deptWiseEmpCount = data.stream().collect(
+                groupingBy(
+                        EmplooyeeData::getDept,
+                        Collectors.counting() //downstream collector method counting
+                )
+        );
+        System.out.println("deptWiseEmpCount :: " + deptWiseEmpCount);
 
         ///////////////////////////////////////////////////////////////////////////
 

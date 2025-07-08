@@ -1,4 +1,4 @@
-package Java8;
+package Java8.StreamAPI;
 
 
 import java.util.*;
@@ -55,6 +55,14 @@ class Item {
 
     public String getProductName() { return productName; }
     public double getPrice() { return price; }
+
+    @Override
+    public String toString() {
+        return "Item{" +
+                "productName='" + productName + '\'' +
+                ", price=" + price +
+                '}';
+    }
 }
 
 class Empl {
@@ -115,8 +123,8 @@ public class PracticeStreamAPI {
 
         OptionalDouble average = words.stream()
                 .filter(s -> s.length() > 5) // Intermediate: Keep strings longer than 5
-                .mapToInt(String::length)
-                .peek(System.out::println)// Intermediate: Map strings to their lengths (IntStream)
+                .mapToInt(String::length) // Intermediate: Map strings to their lengths (IntStream)
+                .peek(System.out::println)
                 .average();
         //using the summary statistic method
         IntSummaryStatistics stats = words.stream()
@@ -168,6 +176,33 @@ public class PracticeStreamAPI {
 
         String deptNameWithHighestAvgSal = avgSalPerDept.entrySet().stream().max(Map.Entry.comparingByValue()).map(Map.Entry::getKey).orElse("N/A");
         System.out.println("Dept name with highest avg salary :: "+ deptNameWithHighestAvgSal);
+
+        //6) You have a list of Order objects, and each Order contains a list of LineItem objects.
+        // Find a list of all unique products that have been ordered across all orders.
+        List<Item> distinctItemsAcrossOrders = orders.stream()
+                .flatMap(order -> order.getItems().stream()).distinct()
+                .collect(Collectors.toList());
+        System.out.println("distinctItemsAcrossOrders :: " + distinctItemsAcrossOrders);
+
+        //same question is solved will different Data and showcasing the use of record
+        record LineItem(String productName, int quantity) {} //introduces in java 14 and require java 17 records are immutable objects which are mostly used for creating DTOs/ pojo classes
+        record Order(int orderId, List<LineItem> lineItems) {}
+
+        List<Order> ordersList = Arrays.asList(
+                new Order(1, Arrays.asList(new LineItem("Laptop", 1), new LineItem("Mouse", 2))),
+                new Order(2, Arrays.asList(new LineItem("Keyboard", 1), new LineItem("Mouse", 1))),
+                new Order(3, Arrays.asList(new LineItem("Laptop", 1), new LineItem("Monitor", 1)))
+        );
+
+        List<String> lineItemsList = ordersList.stream()
+                .flatMap(
+                        order -> order.lineItems().stream()
+                                .map(LineItem::productName) //if you apply distinct over here it will be applied on each stream(LineItem list of an order) inside the flatmap
+                )
+                .distinct()
+                .toList();
+        System.out.println("lineItemsList :: " + lineItemsList);
+
 
     }
 }

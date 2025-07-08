@@ -16,7 +16,7 @@ public class ReverseIntegerLeetcode {
         int result=0;
         while( num !=0 ){
             int tail = num %10;
-            int newResult = (result * 10) + tail;
+            int newResult = result * 10 + tail;
             if((newResult - tail) /10 != result){
                 //it just simple doing opposite of line 14 and comparing the newResult value is same as old result value or not
 //                If overflow exists, the new result will not equal previous one.
