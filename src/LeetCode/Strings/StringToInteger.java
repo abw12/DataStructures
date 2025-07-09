@@ -27,6 +27,41 @@ public class StringToInteger {
     public static void main(String[] args) {
         String s = "21474836460";
         System.out.println(stringToInt(s));
+        System.out.println(atoi(s));
+    }
+
+
+    //similar approach only change is using the built-in trim and isDigit method of java which is more readable and quick to solve ij interview
+    //time and space complexity also remain the same
+    private static Integer atoi(String s){
+        int result=0;
+        String trimS=s.trim(); //remove the leading and trailing white spaces
+        int len = trimS.length();
+        boolean negativeFlag=false;
+
+        if(len == 0) return 0; //if after trimming the string is empty return 0 immediately
+        int i=0;
+        //check the symbol
+        if(trimS.charAt(i) == '-'){
+            negativeFlag=true;
+            i++;
+        }else if(trimS.charAt(i) == '+'){
+            i++;
+        }
+
+        // loop over for valid integer characters
+        while(i < len && Character.isDigit(trimS.charAt(i))){
+
+            //front digit
+            int digit = trimS.charAt(i) - '0'; //ASCII value of 0 = 48 so example integer 5=53 and 0= 48 => 53-48= 5
+
+            if(result > Integer.MAX_VALUE/10 || (result == Integer.MAX_VALUE/10 && digit > 7) ){
+                return negativeFlag ? Integer.MIN_VALUE : Integer.MAX_VALUE; //return min/max value if the number is overflowed over the 32 bit signed range
+            }
+            result = result * 10 + digit;
+            i++;
+        }
+        return negativeFlag ? -result : result;
     }
 
     //time complexity is O(n)
@@ -68,8 +103,8 @@ public class StringToInteger {
 
             // to avoid integer overflow
 
-            if(result > (Integer.MAX_VALUE /10) || (result == (Integer.MAX_VALUE/10) && digit > 7)){
-                return isNegative ? Integer.MIN_VALUE : Integer.MAX_VALUE;
+            if(result > (java.lang.Integer.MAX_VALUE /10) || (result == (java.lang.Integer.MAX_VALUE/10) && digit > 7)){
+                return isNegative ? java.lang.Integer.MIN_VALUE : java.lang.Integer.MAX_VALUE;
             }
 
             result = (result * 10) + digit;

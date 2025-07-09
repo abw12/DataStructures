@@ -9,6 +9,7 @@ public class ReverseIntegerLeetcode {
         int num=-34567890;
 
         System.out.println(reverse(num));
+        System.out.println(reverseUsingPreCheck(num));
 
     }
 
@@ -28,5 +29,26 @@ public class ReverseIntegerLeetcode {
             num = num/10;
         }
         return result;
+    }
+
+    //Full implementations using pre-check
+    private static int reverseUsingPreCheck(int num){
+        int rev=0;
+        while(num !=0){
+            int digit = num % 10;
+
+            // positive signed pre-check before doing any arithmatic operations which could overflow the interger 2^31-1
+            if(rev > Integer.MAX_VALUE/10 || (rev == Integer.MAX_VALUE/10 && digit > 7))
+                    return 0;//Integer.MAX_VALUE = 2147483647(10 digits) last digit is 7 therefore one more comparison on the last digit (> 7 or < –8)
+                                // finalises the decision.
+
+            // negative overflow gaurd
+            if(rev < Integer.MIN_VALUE/10 || (rev == Integer.MIN_VALUE/10 && digit < -8))
+                    return 0;
+
+            rev=rev * 10 + digit;
+            num /= 10;
+        }
+        return rev;
     }
 }
