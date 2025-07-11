@@ -1,5 +1,7 @@
 package Java8;
 
+import Java8.StreamAPI.EmplooyeeData;
+
 import java.util.*;
 import java.util.function.BinaryOperator;
 import java.util.function.Function;
@@ -8,64 +10,6 @@ import java.util.stream.Stream;
 
 import static java.util.stream.Collectors.groupingBy;
 import static java.util.stream.Collectors.toMap;
-
-class EmplooyeeData {
-
-    private String Name;
-    private String dept;
-    private double salary;
-
-    private int yearsOfExp;
-
-    public EmplooyeeData(String name, String dept, double salary,int yearsOfExp) {
-        Name = name;
-        this.dept = dept;
-        this.salary = salary;
-        this.yearsOfExp=yearsOfExp;
-    }
-
-    public String getName() {
-        return Name;
-    }
-
-    public void setName(String name) {
-        Name = name;
-    }
-
-    public String getDept() {
-        return dept;
-    }
-
-    public void setDept(String dept) {
-        this.dept = dept;
-    }
-
-    public double getSalary() {
-        return salary;
-    }
-
-    public void setSalary(double salary) {
-        this.salary = salary;
-    }
-
-    public int getYearsOfExp() {
-        return yearsOfExp;
-    }
-
-    public void setYearsOfExp(int yearsOfExp) {
-        this.yearsOfExp = yearsOfExp;
-    }
-
-    @Override
-    public String toString() {
-        return "EmplooyeeData{" +
-                "Name='" + Name + '\'' +
-                ", dept='" + dept + '\'' +
-                ", salary=" + salary +
-                ", yearsOfExp=" + yearsOfExp +
-                '}';
-    }
-}
 
 public class HighestSalary {
 
@@ -79,7 +23,7 @@ public class HighestSalary {
                 new EmplooyeeData("Mahesh","Dev",260000,20),
                 new EmplooyeeData("Vishal","DevOps",160000,15),
                 new EmplooyeeData("Inder","DevOps",100000,18)
-                ).collect(Collectors.toList());
+                ).toList();
 
 
         //WAP to find highest salary of an employee from each dept
@@ -161,46 +105,5 @@ public class HighestSalary {
                 )
         );
         System.out.println("deptWiseEmpCount :: " + deptWiseEmpCount);
-
-        ///////////////////////////////////////////////////////////////////////////
-
-        //Treemap output will sort the keys in alphabatical order maintaining the natural ordering of the keys(i.e name)
-        // since we did not provide any comparator during Map creation time
-//       The TreeMap, on the other hand, completely ignores the order in which entries come in.
-//       It re-orders them using String.compareTo(key1, key2), because the key type is String and no comparator was supplied.
-//       Hence the apparent “unsorted” output.
-        TreeMap<String, Integer> treeMapByYrsOfExp = data.stream()
-                .filter(e -> e.getYearsOfExp() > 10)
-                .sorted(Comparator.comparingInt(EmplooyeeData::getYearsOfExp))
-                .collect(toMap(EmplooyeeData::getName, EmplooyeeData::getYearsOfExp, (v1, v2) -> v2, TreeMap::new));
-
-        //LinkedHashMap maintains and preserve the insertion order. so the sorted method result will be added into output map in sorted order itself
-        //So the LinkedHashMap looks “sorted by years” only because you happen to insert in that order.
-        //LinkedHashMap itself never sorts; it just remembers arrival order.
-        LinkedHashMap<String, Integer> linkedHashMapByYrsOfExp = data.stream()
-                .filter(e -> e.getYearsOfExp() > 10)
-                .sorted(Comparator.comparingInt(EmplooyeeData::getYearsOfExp))
-                .collect(toMap(EmplooyeeData::getName, EmplooyeeData::getYearsOfExp, (v1, v2) -> v2, LinkedHashMap::new));
-
-        System.out.println("treeMapByYrsOfExp :: "+ treeMapByYrsOfExp);
-        System.out.println("linkedHashMapByYrsOfExp :: "+ linkedHashMapByYrsOfExp);
-
-        ///////////////////////////////////////////////////////////////////////////
-
-        //using the custom comparator in treemap for custom object sorting or we cna also implement comparable interface in the EmployeeData class
-        //to sort the custom object key using treemap, the thenComparing comes into picture when there is same yearofexp of two object/employee
-        // in that case the comparator return 0 and then we again check with employee name and sort the data using name property.
-        TreeMap<EmplooyeeData,String> empDataByDept = data.stream()
-                .collect(toMap(
-                        Function.identity(),
-                        EmplooyeeData::getName,
-                        (e1,e2) -> e2,
-                        () -> new TreeMap<>(
-                                Comparator.comparingInt(EmplooyeeData::getYearsOfExp).reversed()
-                                        .thenComparing(EmplooyeeData::getName)
-                        )
-                ));
-
-        System.out.println("empDataByDept :: " +empDataByDept);
     }
 }

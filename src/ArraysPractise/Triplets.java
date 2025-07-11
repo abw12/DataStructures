@@ -57,14 +57,82 @@ public class Triplets {
         return false;
     }
 
+    //this solution is specifically for the 3sum question where target is zero
+    // it doesn't make use of the target since we know we want 3 numbers whose sum is equal to 0
+    private static List<List<Integer>> solution2(int[] arr){
+
+        Set<List<Integer>> result = new HashSet<>();
+        List<Integer> z = new ArrayList<>();
+        List<Integer> p = new ArrayList<>();
+        List<Integer> n = new ArrayList<>();
+
+        // iterate and form the three groups zeros,-ve,+ve
+        for(Integer num:arr){
+            if(num == 0){
+                z.add(num);
+            }else if(num > 0){
+                p.add(num);
+            }else{
+                n.add(num);
+            }
+        }
+
+        //create +ve and -ve sets for faster lookup
+        Set<Integer> pSet = new HashSet<>(p); //+ve set
+        Set<Integer> nSet = new HashSet<>(n); //-ve set
+
+        // if all are zeros
+        if(z.size() >=3 )
+            result.add(List.of(0,0,0));
+
+        // one +ve , one -ve and one zero (1,0,-1)
+        if(!z.isEmpty()){
+            for(Integer pos : p){
+                if(nSet.contains(-pos)){
+                    result.add(List.of(pos,0,-pos));
+                }
+            }
+        }
+        //{ -4,-1,-1,0,1,2,-2};
+        //two +ve and one -ve (1,1,-2)
+        if(!p.isEmpty()){
+            for(int i=0 ; i < p.size() ; i++){
+                int target = p.get(i);
+                for(int j=i+1; j < p.size();j++){
+                    target += p.get(j);
+                    if(nSet.contains(-target)){
+                        result.add(List.of(p.get(i),p.get(j),-target));
+                    }
+                }
+            }
+        }
+
+        //two -ve and one +ve (-1,-1,2)
+        if(!n.isEmpty()){
+            for(int i=0 ; i < n.size() ; i++){
+                int target = n.get(i);
+                for(int j=i+1; j < n.size();j++){
+                    target += n.get(j);
+                    if(pSet.contains(-target)){
+                        result.add(List.of(n.get(i),n.get(j),-target));
+                    }
+                }
+            }
+        }
+
+        return new ArrayList<>(result);
+    }
+
     public static void main(String[] args) {
         int[] input = {12, 3, 4, 1, 6, 9,8};
         int target1 = 24;
         int[] num = { 12, 3, 4, 1, 6, 9,8 };
         int target2 = 24;
+        int[] num3Sum = { -4,-1,-1,0,1,2,-2}; //answer : [{-1,-1,2},{2,0,-2},{-1,0,1}]
 
 
         System.out.println("Triplets: " +checkTriplets(input,target1));
         System.out.println("is triplet present: "+ threeSumUsingHashing(num,target2));
+        System.out.println("3sum using 2nd approach :: " + solution2(num3Sum));
     }
 }
