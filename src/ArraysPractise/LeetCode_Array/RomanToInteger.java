@@ -5,44 +5,42 @@ import java.util.Map;
 
 public class RomanToInteger {
 
-    public static void convertToInteger(String input){
-        Map<String,Integer> romanSymbolMap = new HashMap<>();
-        romanSymbolMap.put("I",1);
-        romanSymbolMap.put("V",5);
-        romanSymbolMap.put("X",10);romanSymbolMap.put("L",50);romanSymbolMap.put("C",100);romanSymbolMap.put("D",500);
-        romanSymbolMap.put("M",1000);
+    private static Map<Character,Integer> romanSymbolMap = new HashMap<>();
+    private static void fillRomanMap(){
+        romanSymbolMap.put('I',1);
+        romanSymbolMap.put('V',5);
+        romanSymbolMap.put('X',10);
+        romanSymbolMap.put('L',50);
+        romanSymbolMap.put('C',100);
+        romanSymbolMap.put('D',500);
+        romanSymbolMap.put('M',1000);
+    }
 
-        String[] romanNum=input.split("");
-        int sum=0;
-        int len = romanNum.length-1;
-        for(int i=0 ; i < len ; i++ ){
-//            if(romanSymbolMap.get(romanNum[i]) > romanSymbolMap.get(romanNum[i+1])  ){
-//                sum+= romanSymbolMap.get(romanNum[i]);
-//            } else if (romanSymbolMap.get(romanNum[i]) < romanSymbolMap.get(romanNum[i+1]) ){
-//                sum+= romanSymbolMap.get(romanNum[i+1]) - romanSymbolMap.get(romanNum[i]) ;
-//                i++;
-//            }else{
-//                sum+= romanSymbolMap.get(romanNum[i]);
-//                    if(i+1 == romanNum.length-1 && romanNum[i+1].equals("I") ) {
-//                        sum += romanSymbolMap.get(romanNum[i + 1]);
-//                    }
-//            }
-            if(romanSymbolMap.get(romanNum[i])  < romanSymbolMap.get(romanNum[i+1]) ){
-                sum-= romanSymbolMap.get(romanNum[i]);
+    private static Integer romanToInteger(String romanNum){
+        fillRomanMap();
+        int result = 0;
+        Character prev_symbol = null;
+
+        for(Character ch : romanNum.toCharArray()){
+            if(prev_symbol != null){
+                if(romanSymbolMap.get(prev_symbol) < romanSymbolMap.get(ch)){
+                    result+=romanSymbolMap.get(ch) - romanSymbolMap.get(prev_symbol) *2; // subtracting twice the value since in previous iteration we have added the value first
+                }else{
+                    result+=romanSymbolMap.get(ch); // add the current symbol value to the total
+                }
             }else{
-                sum+= romanSymbolMap.get(romanNum[i]);
+                result+=romanSymbolMap.get(ch);
             }
+            prev_symbol=ch; // keeping track of last encounter character
         }
-            sum+= romanSymbolMap.get(romanNum[len]);
-        System.out.println("Roman Number " + input + " conversion to Interger is : " + sum);
-
+        return result;
     }
 
 
     public static void main(String[] args) {
         String input="MCIVII";
 
-        convertToInteger(input);
+        System.out.println(romanToInteger(input));
     }
 
 }

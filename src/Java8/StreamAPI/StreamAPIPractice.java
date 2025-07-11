@@ -8,6 +8,8 @@ import java.util.function.Supplier;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import static java.util.stream.Collectors.toMap;
+
 class Student {
     private String name;
     private String subject;
@@ -65,6 +67,17 @@ public class StreamAPIPractice {
                 new Student("Sara","Math",91),
                 new Student("Sara","History",88)
                 ).collect(Collectors.toList());
+
+
+        List<EmplooyeeData> data = Stream.of(new EmplooyeeData("Abhishek","Dev",60000,3),
+                new EmplooyeeData("Manali","Dev",80000,14),
+                new EmplooyeeData("Jashma","QA",50000,4),
+                new EmplooyeeData("Amit","QA",120000, 3),
+                new EmplooyeeData("Manoj","Dev",160000,14),
+                new EmplooyeeData("Mahesh","Dev",260000,20),
+                new EmplooyeeData("Vishal","DevOps",160000,15),
+                new EmplooyeeData("Inder","DevOps",100000,18)
+        ).toList();
 
         //Find total marks per student
         Map<String, Integer> groupedByName = listOfStudents.stream()
@@ -135,6 +148,81 @@ public class StreamAPIPractice {
         System.out.println(userNameWithUUID);
 
         ////////////////////////////////////////////////////////
+
+        // How sorting and ordering works in Treemap vs LinkedHashMap
+
+        ///////////////////////////////////////////////////////////////////////////
+
+        //Treemap output will sort the keys in alphabatical order maintaining the natural ordering of the keys(i.e name)
+        // since we did not provide any comparator during Map creation time
+//       The TreeMap, on the other hand, completely ignores the order in which entries come in.
+//       It re-orders them using String.compareTo(key1, key2), because the key type is String and no comparator was supplied.
+//       Hence the apparent “unsorted” output.
+        TreeMap<String, Integer> treeMapByYrsOfExp = data.stream()
+                .filter(e -> e.getYearsOfExp() > 10)
+                .sorted(Comparator.comparingInt(EmplooyeeData::getYearsOfExp))
+                .collect(toMap(EmplooyeeData::getName, EmplooyeeData::getYearsOfExp, (v1, v2) -> v2, TreeMap::new));
+
+        //LinkedHashMap maintains and preserve the insertion order. so the sorted method result will be added into output map in sorted order itself
+        //So the LinkedHashMap looks “sorted by years” only because you happen to insert in that order.
+        //LinkedHashMap itself never sorts; it just remembers arrival order.
+        LinkedHashMap<String, Integer> linkedHashMapByYrsOfExp = data.stream()
+                .filter(e -> e.getYearsOfExp() > 10)
+                .sorted(Comparator.comparingInt(EmplooyeeData::getYearsOfExp))
+                .collect(toMap(EmplooyeeData::getName, EmplooyeeData::getYearsOfExp, (v1, v2) -> v2, LinkedHashMap::new));
+
+        System.out.println("treeMapByYrsOfExp :: "+ treeMapByYrsOfExp);
+        System.out.println("linkedHashMapByYrsOfExp :: "+ linkedHashMapByYrsOfExp);
+
+        ///////////////////////////////////////////////////////////////////////////
+
+        //using the custom comparator in treemap for custom object sorting or we can also implement comparable interface in the EmployeeData class
+        //to sort the custom object key using treemap, the thenComparing comes into picture when there is same yearofexp of two object/employee
+        // in that case the comparator return 0 and then we again check with employee name and sort the data using name property.
+        TreeMap<EmplooyeeData,String> empDataByDept = data.stream()
+                .collect(toMap(
+                        Function.identity(),
+                        EmplooyeeData::getName,
+                        (e1,e2) -> e2,
+                        () -> new TreeMap<>(
+                                Comparator.comparingInt(EmplooyeeData::getYearsOfExp).reversed()
+                                        .thenComparing(EmplooyeeData::getName)
+                        )
+                ));
+
+        System.out.println("empDataByDept :: " +empDataByDept);
+
+        // When a sorting the map which is having Integer (built-in class as the key)
+        Map<Integer, String> numMap = new HashMap<>();
+        numMap.put(1, "I");
+        numMap.put(4, "IV");
+        numMap.put(5, "V");
+        numMap.put(9, "IX");
+        numMap.put(10, "X");
+        numMap.put(40, "XL");
+        numMap.put(50, "L");
+        numMap.put(90, "XC");
+        numMap.put(100, "C");
+        numMap.put(400, "CD");
+        numMap.put(500, "D");
+        numMap.put(900, "CM");
+        numMap.put(1000, "M");
+
+        Map<Integer,String> sortedByKeys =  numMap.entrySet().stream()
+                .sorted(Map.Entry.comparingByKey(Comparator.reverseOrder()))
+                .collect(Collectors.toMap(Map.Entry::getKey,Map.Entry::getValue,(v1,v2)->v2, LinkedHashMap::new));
+        System.out.println(sortedByKeys);
+
+
+        TreeMap<Integer, String> treeMapDsc = numMap.entrySet().stream()
+                .collect(Collectors
+                        .toMap(Map.Entry::getKey,
+                                Map.Entry::getValue,
+                                (v1, v2) -> v2,
+                                () -> new TreeMap<>(Comparator.comparingInt(Integer::intValue).reversed())
+                        )
+                );
+        System.out.println(treeMapDsc);
 
 
 
