@@ -36,7 +36,7 @@ public class FindPeakElement {
                 return mid;
             }else if(nums[mid] < nums[mid+1]){ //the peak element will be on the right side space
                 start = mid +1;
-            }else if(nums[mid] < nums[mid - 1]){  //so our peak element is on the left side space
+            }else {  //so our peak element is on the left side space
                 end = mid -1;
             }
         }
