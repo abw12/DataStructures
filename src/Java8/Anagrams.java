@@ -99,6 +99,7 @@ class GroupAnagramsLeetCode{
     }
 
     private String encode(String str){
+
         int[] alpha = new int[26];
 
         for(int i=0; i < str.length() ;i++){

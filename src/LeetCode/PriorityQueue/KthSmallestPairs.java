@@ -50,6 +50,44 @@ public class KthSmallestPairs {
         return result;
     }
 
+
+    // Time = O(k log m) where m is the size of nums1 and k is limig given is the question.
+     // space = O(m)
+    // Treat the matrix of sums as a k-way merge problem. Always pop the current smallest sum and lazily push its “next” neighbours.
+    public List<List<Integer>> optimalSolution(int[] nums1, int[] nums2, int k){
+            int m=nums1.length;
+            int n=nums2.length;
+            List<List<Integer>> result = new ArrayList<>();
+            //below comparingInt function is doing same as => (a,b) -> (nums1[a[0]] + nums2[a[1]]) - (nums1[b[0]] + nums2[b[1]])
+           // (nums1[i] + nums2[j]) -(nums1[i] + nums2[j]) where a and b are two objects(int[] in PQ) compared.
+           // example comparing indices (0,1) and (1,0) => 3 & 9 => 3-9 => -6, so it will be kept on top of the PQ. as we maintain minHeap
+            PriorityQueue<int[]> pq = new PriorityQueue<>(Comparator.comparingInt(a -> (nums1[a[0]] + nums2[a[1]])));
+            // Create the first column of the matrix.
+            //Each tuple stores indices (i, j) into the two arrays. The heap key is nums1[i] + nums2[j].
+            for(int i = 0; i < Math.min(k,m); i++){ // only need k rows at most
+                pq.offer(new int[]{i,0}); // (row i, col j) adding firs col (0,0),(1,0),(2,0)
+            }
+
+            while(k-- > 0 && !pq.isEmpty()){
+                int[] top = pq.poll(); //remove and return the top of the PQ. (returns smallest unreported pair)
+                int i = top[0]; // i represent nums1
+                int j = top[1]; //j represent nums2
+                result.add(List.of(nums1[i],nums2[j]));
+
+                if(j+1 < n ){   // push neighbour to the right
+                    pq.offer(new int[]{i,j+1});
+                }
+            }
+            return result;
+    }
+    // nums1 = [1,7,11], nums2 = [2,4,6], k = 3
+    /*Initial heap: (1,2)=3 , (7,2)=9 , (11,2)=13   -> [3,9,13]
+    pop 3 : push right neighbour (1,4)=5         -> [5,9,13]
+    pop 5 : push (1,6)=7                         -> [7,9,13]
+    pop 7 : push (7,4)=11                        -> [9,11,13]
+    output so far : [ (1,2), (1,4), (1,6) ]      // done (k=3)*/
+
+
     public static void main(String[] args) {
         int[] nums1 = new int[]{1,2,4,5,6};
         int[] nums2 = new int[]{3,5,7,9};
