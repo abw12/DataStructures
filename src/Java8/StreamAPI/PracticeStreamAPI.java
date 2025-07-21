@@ -201,6 +201,7 @@ public class PracticeStreamAPI {
                 )
                 .distinct()
                 .toList();
+
         System.out.println("lineItemsList :: " + lineItemsList);
 
 
