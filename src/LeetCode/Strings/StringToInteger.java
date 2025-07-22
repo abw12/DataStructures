@@ -61,6 +61,7 @@ public class StringToInteger {
             result = result * 10 + digit;
             i++;
         }
+
         return negativeFlag ? -result : result;
     }
 

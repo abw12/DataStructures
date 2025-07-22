@@ -14,21 +14,21 @@ public class ReverseIntegerLeetcode {
     }
 
     private static int reverse(int num){
-        int result=0;
+        int reverse_Number=0;
         while( num !=0 ){
-            int tail = num %10;
-            int newResult = result * 10 + tail;
-            if((newResult - tail) /10 != result){
-                //it just simple doing opposite of line 14 and comparing the newResult value is same as old result value or not
-//                If overflow exists, the new result will not equal previous one.
-                //this condition is to make sure that last current result(sum of reverse digits)
+            int tail = num % 10;
+            int curr_number = reverse_Number * 10 + tail;
+            if((curr_number - tail) /10 != reverse_Number){
+                //it just simple doing opposite of line 14 and comparing the curr_number value is same as old reverse_Number value or not
+//                If overflow exists, the new reverse_Number will not equal previous one.
+                //this condition is to make sure that last current reverse_Number(sum of reverse digits)
                 // within the range of 32-bit signed integer value (2^-31 to 2^31 -1) , and does not overflow it.
                 return 0;
             }
-            result=newResult;
+            reverse_Number=curr_number;
             num = num/10;
         }
-        return result;
+        return reverse_Number;
     }
 
     //Full implementations using pre-check
