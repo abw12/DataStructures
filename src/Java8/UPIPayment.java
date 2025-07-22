@@ -7,7 +7,7 @@ import java.util.Random;
 //example of how to implement an functional interface
 //it should have only one abstarct method , can have multiple default and static methods
 @FunctionalInterface
-public interface UPIPayment {
+interface UPIPayment {
     //abtract method as we dont have any implementation
     String doPayment(String source,String dest,String amount);
 
