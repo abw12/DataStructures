@@ -1,4 +1,4 @@
-package ArraysPractise;
+package LeetCode.KadanesAlgo;
 //Given an integer array nums, find the contiguous subarray (containing at least one number) which has the largest sum and return its sum.
 // A subarray is a contiguous part of an array.
 
@@ -43,14 +43,14 @@ public class MaxSubArray {
             return nums[0];
         }
 
-        int sum=0;
-        int maxSum=nums[0];
+        int currentMax=0;
+        int globalMax=nums[0];
         for(int i=0; i < nums.length ;i++){
-            sum+=nums[i];
-            if(sum > maxSum) maxSum=sum;
-            if(sum < 0 ) sum=0;
+            currentMax+=nums[i];
+            if(currentMax > globalMax) globalMax=currentMax;
+            if(currentMax < 0 ) currentMax=0;
         }
-        return maxSum;
+        return globalMax;
 
     }
 

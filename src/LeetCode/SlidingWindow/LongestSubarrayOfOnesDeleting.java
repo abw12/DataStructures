@@ -11,23 +11,22 @@ public class LongestSubarrayOfOnesDeleting {
         int len = nums.length;
         if (nums.length == 0) return 0;
         int l = 0;
-        int r = 0;
-        while(r < len){
+        for(int r =0; r < len; r++){
+            // if the current element is 0, we need to decrement allowed
             if(nums[r] == 0)
                 allowed--;
-            while(allowed < 0 ){
+            if(allowed < 0 ){
                 if(nums[l] == 0)
                     allowed++;
                 l++;
             }
             longest = Math.max(longest,r-l);
-            r++;
         }
         return longest;
     }
 
     public static void main(String[] args) {
-        int[] nums = {1,1,0,1,1,0,1,1,1};
+        int[] nums = {1,1,1,1,1,1,1};
         System.out.println(longestSubArray(nums));
         // Output: 5, as we can delete one 0 to get the longest sub
 
