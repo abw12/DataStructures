@@ -16,7 +16,7 @@ class StackUsingOneQueue{
         top=x;
         int size = q1.size();
         while(size > 1){
-            q1.add(q1.remove());   //bcoz LinkedList is the implementation of the queue it remove the first (head) element from the list
+            q1.add(q1.remove());   //bcoz LeetCode.LinkedList is the implementation of the queue it remove the first (head) element from the list
                                     //so here we remove first element and add it at the end of the list (inverting the list)
                                     //since to implement stack using queue we need last inserted element at the front of the queue
             size--;
@@ -46,7 +46,7 @@ class StackUsingOneQueue{
 
 public class MyStack {
 
-    private static Queue<Integer> q1 = new LinkedList<>(); // we use LinkedList obj  with queue interface
+    private static Queue<Integer> q1 = new LinkedList<>(); // we use LeetCode.LinkedList obj  with queue interface
     // since queue remove() method pop element from front & arrayList remove() we have to give the index
     private static Queue<Integer> q2 = new LinkedList<>();
     private int top;

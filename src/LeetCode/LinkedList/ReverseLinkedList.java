@@ -1,9 +1,11 @@
-package LinkedList;
+package LeetCode.LinkedList;
 //leetcode way to solve the reverse of the linkedlist
 
 class ListNode{
     int val;
     ListNode next;
+
+    public ListNode() {}
 
     public ListNode(int value){
         this.val =value;

@@ -1,4 +1,4 @@
-package LinkedList;
+package LeetCode.LinkedList;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -98,7 +98,7 @@ public class SInglyLinkedList {
             linkedList.add(currentNode.getValue());
             currentNode=currentNode.getNext();
         }
-        System.out.println("LinkedList: "+ linkedList.toString());
+        System.out.println("LeetCode.LinkedList: "+ linkedList.toString());
     }
 
     public void print() {

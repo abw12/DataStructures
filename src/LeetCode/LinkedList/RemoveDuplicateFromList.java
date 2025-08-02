@@ -1,4 +1,4 @@
-package LinkedList;
+package LeetCode.LinkedList;
 
 
 //Given the head of a sorted linked list, delete all duplicates such that each element appears only once.

@@ -1,4 +1,4 @@
-package LinkedList;
+package LeetCode.LinkedList;
 
 /*Given head, the head of a linked list, determine if the linked list has a cycle in it.
 

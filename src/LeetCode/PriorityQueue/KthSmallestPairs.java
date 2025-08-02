@@ -11,7 +11,7 @@ import java.util.*;
         this.value = value;
     }
 }*/
-//create the equals and hashcode method if using the above class otherwise the it will not able to identify the duplicate and
+//create the equals and hashcode method if using the above class otherwise it will not able to identify the duplicate
 
 // We can create a record in the Java 17 for the same purpose ( creating a custom Pair class like above)
 record Pair<K, V>(K key, V value) {}
@@ -51,7 +51,7 @@ public class KthSmallestPairs {
     }
 
 
-    // Time = O(k log m) where m is the size of nums1 and k is limig given is the question.
+    // Time = O(k log m) where m is the size of nums1 and k is limit given is the question.
      // space = O(m)
     // Treat the matrix of sums as a k-way merge problem. Always pop the current smallest sum and lazily push its “next” neighbours.
     public List<List<Integer>> optimalSolution(int[] nums1, int[] nums2, int k){
@@ -65,7 +65,7 @@ public class KthSmallestPairs {
             // Create the first column of the matrix.
             //Each tuple stores indices (i, j) into the two arrays. The heap key is nums1[i] + nums2[j].
             for(int i = 0; i < Math.min(k,m); i++){ // only need k rows at most
-                pq.offer(new int[]{i,0}); // (row i, col j) adding firs col (0,0),(1,0),(2,0)
+                pq.offer(new int[]{i,0}); // (row i, col j) adding first col (0,0),(1,0),(2,0)
             }
 
             while(k-- > 0 && !pq.isEmpty()){
