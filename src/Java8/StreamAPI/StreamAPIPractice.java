@@ -69,15 +69,8 @@ public class StreamAPIPractice {
                 ).collect(Collectors.toList());
 
 
-        List<EmplooyeeData> data = Stream.of(new EmplooyeeData("Abhishek","Dev",60000,3),
-                new EmplooyeeData("Manali","Dev",80000,14),
-                new EmplooyeeData("Jashma","QA",50000,4),
-                new EmplooyeeData("Amit","QA",120000, 3),
-                new EmplooyeeData("Manoj","Dev",160000,14),
-                new EmplooyeeData("Mahesh","Dev",260000,20),
-                new EmplooyeeData("Vishal","DevOps",160000,15),
-                new EmplooyeeData("Inder","DevOps",100000,18)
-        ).toList();
+        EmplooyeeData empObj = new EmplooyeeData();
+        List<EmplooyeeData> data = empObj.getInitialList();
 
         //Find total marks per student
         Map<String, Integer> groupedByName = listOfStudents.stream()
@@ -192,7 +185,9 @@ public class StreamAPIPractice {
 
         System.out.println("empDataByDept :: " +empDataByDept);
 
-        // When a sorting the map which is having Integer (built-in class as the key)
+        // When sorting the map which is having key as Integer (built-in class as the key)
+        //since Integer class already implements the Comparable interface
+        //we can use the natural ordering of the Integer class to sort the map
         Map<Integer, String> numMap = new HashMap<>();
         numMap.put(1, "I");
         numMap.put(4, "IV");

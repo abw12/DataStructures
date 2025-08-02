@@ -2,6 +2,9 @@ package Java8.StreamAPI;
 
 
 import java.util.*;
+import java.util.function.Function;
+import java.util.stream.Collector;
+import java.util.stream.Collector.Characteristics;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -204,6 +207,32 @@ public class PracticeStreamAPI {
 
         System.out.println("lineItemsList :: " + lineItemsList);
 
+        // 7) Given a list of Employee objects, find the employee with the highest salary.
+        employees.stream().max(Comparator.comparingDouble(Empl::getSalary))
+                .ifPresent((emp) ->System.out.println("Employee with highest salary is :: " + emp.getName() + " with salary = " + emp.getSalary()));
 
+        /// creating a custom collector to accumulate the salaries per dept in order.
+        Collector<Empl,LinkedHashMap<String,Double>, LinkedHashMap<String,Double>> salaryByDeptOrdered =
+                Collector.of(
+                    LinkedHashMap::new, /*1. supplier*/
+                    (map,emp) -> map.merge(emp.getDepartment(),emp.getSalary(),Double::sum), /*2. accumulator*/
+                        (left,right) -> { /* 3. combiner */
+                            right.forEach((dept,sal) ->
+                                    left.merge(dept,sal,Double::sum));
+                            return left; //return one container
+                        },
+                        Function.identity(), // 4. finisher
+                        Characteristics.IDENTITY_FINISH, Characteristics.UNORDERED // 5. characteristics
+
+        );
+
+        LinkedHashMap<String,Double> ledgerWithParallel = employees.parallelStream().collect(salaryByDeptOrdered);
+        LinkedHashMap<String,Double> ledgerWithSequential = employees.stream().collect(salaryByDeptOrdered);
+
+        ledgerWithParallel.forEach((dept, total) ->
+                System.out.printf("%-7s : %,.0f%n", dept, total));
+
+        ledgerWithSequential.forEach((dept, total) ->
+                System.out.printf("%-7s : %,.0f%n", dept, total));
     }
 }
