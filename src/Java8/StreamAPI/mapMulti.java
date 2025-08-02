@@ -16,8 +16,16 @@ public class mapMulti {
         //flatmap one-to-many mapping
         //using the flatmap we can extract all the emailId across employees
         List<String> listOfEmails = empList.stream().flatMap(emp -> emp.getEmailAddresses().stream()).toList();
-        System.out.printf("List of emails :: " + listOfEmails);
+        System.out.println("List of emails :: " + listOfEmails);
 
+        // 1. collect every employee email address
+        List<String> empEmailAddressWithMapMulti = empList.stream()
+                .<String>mapMulti(
+                        (emp, consumer) -> emp.getEmailAddresses()
+                                .forEach(consumer)
+                )
+                .toList();
+        System.out.println("empEmailAddressWithMapMulti :: " + empEmailAddressWithMapMulti);
 
     }
 }
