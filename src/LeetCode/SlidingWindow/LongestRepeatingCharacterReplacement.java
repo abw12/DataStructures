@@ -25,7 +25,8 @@ public class LongestRepeatingCharacterReplacement {
     }
     // This approach works similarly to the above but uses a bucket sort technique
     // to keep track of the frequency of characters in the current window.
-    // Its faster in the leetcode runtime environment.
+    // (since there are only 26 uppercase english letters so this approach works better than using hashmap)
+    // It's faster in the leetcode runtime environment.
     // Time complexity is O(n) and space complexity is O(1) since we are using a fixed size array of 26 for the alphabet.
     // similar to approach used above
     private static int usingBucketSort(String s, int k){

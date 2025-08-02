@@ -19,19 +19,24 @@ public class DeterminIfTwoStringAreClose {
             freq2[ch - 'a']++;
 
         //condition 2 - should contain same set of characters
+        // Only the non-zero entries matter; log 26 ≈ constant, so still O(1) extra time.
         for(int i=0; i < 26 ;i++){
             if((freq1[i] == 0 ) != (freq2[i] == 0)){
                 return false;
             }
         }
-        //condition 3 - sort and then compare the frequencies it should match (same multiset of frequencies)
-        // Only the non-zero entries matter; log 26 ≈ constant, so still O(1) extra time.
+        //condition 3 - should have same frequency of characters
+        // sort the frequency array and compare
+        // if the frequency of characters are same then both the frequency array will be same after sorting
+        Arrays.sort(freq1);
+        Arrays.sort(freq2);
 //        for(int i=0; i < 26 ;i++){
 //            if(freq1[i] != freq2[i]){
 //                return false;
 //            }
 //        }
 //        return true;
+        // if not using the below equals method then it can be written as above condition
         return Arrays.equals(freq1,freq2);
     }
 

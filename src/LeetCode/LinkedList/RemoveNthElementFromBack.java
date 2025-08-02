@@ -1,4 +1,4 @@
-package LinkedList;
+package LeetCode.LinkedList;
 
 //Leetcode medium level question
 
