@@ -19,7 +19,7 @@ public class SortList {
         ListNode mid = slow.next; // mid will be the starting point of the 2nd part of the list
         slow.next=null; // last index of the 1st part this way it will separate the 1st and 2nd part of list
 
-        // recursively split the left and right havles of the linkedlist till single unit
+        // recursively split the left and right halves of the linkedlist till single unit
         ListNode left = sortList(head);
         ListNode right = sortList(mid);
 
