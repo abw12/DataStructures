@@ -7,22 +7,13 @@ import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class CollectorsMethodPractise {
 
     public static void main(String[] args) {
 
-        List<EmplooyeeData> listOfEmp = Stream.of(new EmplooyeeData("Abhishek","Dev",60000,4),
-                new EmplooyeeData("Manali","Dev",80000,6),
-                new EmplooyeeData("Jashma","QA",50000,5),
-                new EmplooyeeData("Amit","QA",120000,3),
-                new EmplooyeeData("Manoj","Dev",160000,18),
-                new EmplooyeeData("Mahesh","Dev",260000,20),
-                new EmplooyeeData("Vishal","DevOps",160000,19),
-                new EmplooyeeData("Inder","DevOps",100000,12),
-                new EmplooyeeData("Abhishek","Dev",60000,3)
-        ).collect(Collectors.toList());
+        EmplooyeeData empObj = new EmplooyeeData();
+        List<EmplooyeeData> listOfEmp = empObj.getInitialList();
 
         //retrieve the name of employee groupBy department
         Map<String, List<String>> collect =
