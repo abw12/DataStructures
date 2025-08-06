@@ -26,18 +26,18 @@ public class JumpGame {
          return true; // array length 1 or we never hit a gap
     }
 
-    private static boolean jumpGame1(int[] game1){
-        int l = game1.length;
+    private static boolean jumpGame1(int[] nums){
+        int l = nums.length;
         int goal = l-1;
         for(int i = l-2; i >=0 ; i--){
-            if(i + game1[i] >= goal){
+            if(i + nums[i] >= goal){
                 goal=i;
             }
         }
         return goal == 0;
     }
 
-    // {2,1,1,1,4}
+    // {2,3,1,1,4}
     private static int jumpGame2(int[] nums){
         int len = nums.length;
         int near=0;int far=0;int min_jumps=0;
