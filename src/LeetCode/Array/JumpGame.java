@@ -14,12 +14,12 @@ public class JumpGame {
     //Same time complexity but perform a bit slower in worst case scenario.( runtime taken 2ms compare to 1ms in 1st approach)
     //solve iterating in forward direction
     private static boolean jumpGame1AnotherApproach(int[] nums){
-         int far = 0;
+         int far = 0; //right pointer
          int goal = nums.length-1; //last index
-         for(int i=0; i < nums.length; i++){
+         for(int i=0; i < nums.length; i++){ // i is the left pointer
              if(i > far) return false; //gap we can't cross
              far = Math.max(far,i+nums[i]);
-             if(far >= goal){
+             if(far >= goal){ //if right most pointer reach the last index return true
                  return true;
              }
          }
@@ -44,7 +44,7 @@ public class JumpGame {
         //nums = [2,3,1,1,4]
         while (far < len-1){ //break after 2 loops
             int farthest =0;
-            for(int i=near;i < far+1 ; i++){
+            for(int i=near;i < far+1 ; i++){ //far+1 since we have to make rightmost value inclusive
                 farthest=Math.max(farthest, i + nums[i]); //current index + jumps at current_index(nums[i])
             }
             near=far+1; //1;3 -> after each iteration values
