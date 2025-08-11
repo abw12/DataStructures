@@ -17,7 +17,7 @@ public class JumpGame {
          int far = 0; //right pointer
          int goal = nums.length-1; //last index
          for(int i=0; i < nums.length; i++){ // i is the left pointer
-             if(i > far) return false; //gap we can't cross
+             if(i > far) return false; //gap we can't cross (  when left pointer has crossed the right pointer
              far = Math.max(far,i+nums[i]);
              if(far >= goal){ //if right most pointer reach the last index return true
                  return true;
