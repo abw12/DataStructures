@@ -1,4 +1,4 @@
-package Stack;
+package LeetCode.Stack;
 
 
 import java.util.Iterator;
@@ -8,7 +8,7 @@ public class StackUsingLinkedList implements Iterable<String> {
 
     private Node firstNode = null;
 
-//   Note that our stack iterator returns the items in LIFO order, whereas \verb#java.util.Stack#java.util.Stack returns them in FIFO order.
+//   Note that our stack iterator returns the items in LIFO order, whereas \verb#java.util.LeetCode.Stack#java.util.LeetCode.Stack returns them in FIFO order.
     @Override
     public Iterator iterator() {
         return new ListIterator();
