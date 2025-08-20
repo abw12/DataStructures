@@ -1,4 +1,4 @@
-package Stack;
+package LeetCode.Stack;
 
 import java.util.Arrays;
 import java.util.Iterator;
@@ -61,7 +61,7 @@ public class StackUsingDynamicArray implements  Iterable<String> {
 
     }
 
-// Note that our stack iterator returns the items in LIFO order, whereas \verb#java.util.Stack#java.util.Stack returns them in FIFO order.
+// Note that our stack iterator returns the items in LIFO order, whereas \verb#java.util.LeetCode.Stack#java.util.LeetCode.Stack returns them in FIFO order.
     @Override
     public Iterator<String> iterator() {
         return new ReverseArrayIterator();
