@@ -7,7 +7,7 @@ package LeetCode.Array;
 import java.util.Arrays;
 
 public class ProductOfArrayExceptSelf {
-
+    //{1,3,5,6,7}
     public static int[] productExceptSelf(int[] arr){
         int n = arr.length;
         int[]  res = new int[n];
