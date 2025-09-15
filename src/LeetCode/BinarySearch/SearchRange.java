@@ -9,6 +9,8 @@ public class SearchRange {
     If target is not found in the array, return [-1, -1].
 
     You must write an algorithm with O(log n) runtime complexity.*/
+
+//    {2,3,4,4,6,6,6,6,6,7,8}
     private static int[] searchRange(int[] nums , int target){
         int len =nums.length;
         int l = 0;
@@ -30,9 +32,9 @@ public class SearchRange {
                 }
                 break;
             }else if(nums[mid] < target){
-                l+=1;
+                l+=1; //incrementing the left pointer by 1
             }else{
-                r-=1;
+                r-=1; //decrementing the right pointer by 1
             }
         }
         return new int[]{first,last};

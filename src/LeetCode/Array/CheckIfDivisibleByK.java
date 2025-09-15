@@ -32,10 +32,10 @@ public class CheckIfDivisibleByK {
          return true;
     }
 
-    //use the k-szie array to store the freq of the remainder for each number in the given array
+    //use the k-size array to store the freq of the remainder for each number in the given array
     // array index represents the remainder and the value store in those index is its frequency(count)
     private static boolean useArrayForFreq(int[] arr,int k){
-        int[] freq = new int[k];
+        int[] freq = new int[k]; //index represent the remainder and the value represents its frequency
         for(int n: arr){
             int rem = n % k;
             if(rem < 0)
@@ -43,7 +43,7 @@ public class CheckIfDivisibleByK {
             freq[rem]++;
         }
 
-        if(freq[0] % 2 != 0){ ////if rem=0 count is not event then return false since we can't form the pairs
+        if(freq[0] % 2 != 0){ ////if rem=0 count is not even then return false since we can't form the pairs
             return false;
         }
         for(int i=1; i <= k/2;i++){

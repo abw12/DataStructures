@@ -1,5 +1,8 @@
 package LeetCode.Array;
 
+
+/*Given an integer array nums, return true if there exists a triple of indices (i, j, k)
+such that i < j < k and nums[i] < nums[j] < nums[k]. If no such indices exists, return false.*/
 public class IncreasingTriplets {
 
     public static boolean increasingTriplet(int[] nums){
@@ -12,7 +15,7 @@ public class IncreasingTriplets {
             }else if(n <= second_smallest){
                 second_smallest = n;
             }else{
-                return true; //if any number enter else that mean
+                return true; //if any number enter else that mean we have found the triplets
             }
         }
         return false;
