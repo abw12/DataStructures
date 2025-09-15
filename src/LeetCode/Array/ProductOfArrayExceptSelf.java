@@ -13,6 +13,7 @@ public class ProductOfArrayExceptSelf {
         int[]  res = new int[n];
 
         int left =1;
+        // calculate the product of the
         for(int i=0 ; i < n ; i++){
             if(i > 0){
                 left = left * arr[i-1];
