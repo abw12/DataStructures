@@ -6,7 +6,7 @@ import java.util.Comparator;
 import java.util.List;
 
 public class MergeIntervals {
-
+//    I/P : {{1,3},{15,18},{8,10},{2,6}}
     // basic logic is : If current starting time is less than ending time in previous interval, they are overlapping.
     //but problem here is there is some distance between [1,3] and [2,6] because we have [15,18] and [8,10].
     //That's why it's good idea to sort all intervals with starting time before iteration. After sorting, we will have
