@@ -10,7 +10,7 @@ import java.util.*;
 //3sum problem and this is same only thing here we are checking the target as 0 all the time in 3sum you'll be provided with the target value
 public class Triplets {
 //    Time complexity: O(n^2)
-//    Explanation: Sorting takes O(n logn) & 'for' loop and 'while' loop takes O(n^2) together. But since O(n^2) > O(nlogn). Therefore, O(n^2).
+//    Explanation: Sorting takes O(n log n) & 'for' loop and 'while' loop takes O(n^2) together. But since O(n^2) > O(nlogn). Therefore, O(n^2).
 //    Space complexity: O(n)
 //    Explanation: As the total elements are n and the space complexity will be some factor of n.
 //    Therefore, after removing constant, we are left with O(n).
@@ -39,6 +39,7 @@ public class Triplets {
     //it takes same o(n^2) time complexity
     //it uses extra space since are maintaining the hashset
     // o(n) is the space complexity
+    //the expected input array wil always have positive numbers
     private static boolean threeSumUsingHashing(int[] num,int target){
 
         for(int i=0 ; i < num.length-2 ; i ++){
@@ -93,7 +94,7 @@ public class Triplets {
                 }
             }
         }
-        //{ -4,-1,-1,0,1,2,-2};
+        //{ -4,1,-1,0,1,2,-2};
         //two +ve and one -ve (1,1,-2)
         if(!p.isEmpty()){
             for(int i=0 ; i < p.size() ; i++){

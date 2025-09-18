@@ -16,7 +16,7 @@ public class ContainerWithMostWater {
         int right = height.length - 1 ;
         int water =0;
         while(left < right){
-            water = Math.max(water, (right - left) * Math.min(height[left],height[right]));
+            water = Math.max(water, (right - left) * Math.min(height[left],height[right])); //basically we are doing width * height
             //since we can't have a container which is slanted eliminate the smaller height line
             //(since The smaller one of first and last line doesn't support a higher water level and can thus be safely removed from further consideration. )
             if(height[left] < height[right]){
