@@ -34,14 +34,14 @@ public class LongestSubstring {
 //        s= "pwwkew"
         Map<Character/*letters*/,Integer/*index*/> map = new HashMap<>();
         int max=0;
-        //here i act like a right pointer and j act like a left pointer
-        for(int i=0,j=0; i < s.length(); i++ ){
-            if(map.containsKey(s.charAt(i))){   //store the key as single character in a given string and its value is the position of character
-                j=Math.max(j,map.get(s.charAt(i))+1); //shift left pointer only when you find the repeated character
+        //here r act like a right pointer and l act like a left pointer
+        for(int r=0,l=0; r < s.length(); r++ ){
+            if(map.containsKey(s.charAt(r))){   //store the key as single character in a given string and its value is the position of character
+                l=Math.max(l,map.get(s.charAt(r))+1); //shift left pointer only when you find the repeated character
             }
             //overwriting the repeated character index in the map if found or else add it for the first time
-            map.put(s.charAt(i),i);
-            max=Math.max(max,i-j+1); //this gives  us the max substring length since i is traversing on entire string and j
+            map.put(s.charAt(r),r);
+            max=Math.max(max,r-l+1); //this gives  us the max substring length since r is traversing on entire string and l
             // will be at the position where we found our last repeated character
             //and we do +1 in both scenario sicne the character index in the string starts from the 0th base indices
         }
