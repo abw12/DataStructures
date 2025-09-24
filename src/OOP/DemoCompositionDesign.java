@@ -1,6 +1,5 @@
 package OOP;
 
-import javax.swing.*;
 import java.math.BigDecimal;
 import java.util.Objects;
 
@@ -76,18 +75,20 @@ final class SimplePricing  implements PricingPolicy{
 //// --- Data/Spec + Vehicle that composes behavior ---
 //Difference: With composition, behavior is plugged in. With inheritance, behavior is hardcoded into the class hierarchy.
 record Specifications(String brand,String model,Engine engine){
+    //this is known as compact constructor introduced in java 17
     Specifications{
-        Objects.requireNonNull(brand);
+        Objects.requireNonNull(brand); //we can directly use the parameter fields of the in compact constructor  instead of doing this.brand which will give the compile time error
         Objects.requireNonNull(model);
         Objects.requireNonNull(engine);
     }
 }
 //Here, Vehicle is just a container of behaviors.
 final class Vehicle2{
+    //weeker association
     private final Specifications spec; //this is basically demonstrating the aggregation form (the similar form as composition in association concept of the OOP)
     private final PricingPolicy pricing;
 
-    public Vehicle2(Specifications spec, PricingPolicy pricing){
+    public Vehicle2(Specifications spec, PricingPolicy pricing){ // spec and pricing are just received from outside (constructor injection).
         this.spec = Objects.requireNonNull(spec);
         this.pricing = Objects.requireNonNull(pricing);
     }
@@ -112,6 +113,23 @@ final class Vehicle2{
     }
 }
 
+//If we wanted true Composition than above vehicle2 class can be changed to something like below
+// here Engine is constructed and part-of the vehicle3 object itself.
+final class Vehicle3 {
+
+    private final Engine engine;
+    private final String brand;
+    private final String model;
+
+    public Vehicle3(String brand,String model){
+        this.brand=brand;
+        this.model=model;
+        this.engine = new ElectricMotor(120); // strong ownership (composition => part-of vehicle3)
+    }
+
+    public Engine engine() { return engine; }
+}
+
         /*Why this is powerful
 
         To add a new engine type or new pricing scheme, you compose a different implementation — no subclass explosion.
@@ -126,8 +144,13 @@ final class Vehicle2{
 
         A Specification has an Engine.
 
-        A Vehicle uses a PricingPolicy to compute price.*/
-public class DemoComposition {
+        A Vehicle uses a PricingPolicy to compute price.
+
+        This example is demonstrating the aggregation (weeker form of association) in real-world project.
+        Since the Specification and PricingPolicy can live independently elsewhere if the Vehicle2 object is destroyed.
+        This is more closer to aggregation example then composition.
+        */
+public class DemoCompositionDesign {
 
     public static void main(String[] args) {
         Vehicle2 skoda = new Vehicle2(
