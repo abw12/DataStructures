@@ -20,7 +20,7 @@ public class FindLongestEqualSubArray {
     private static Integer longestEqualSubArrayUsingMap(List<Integer> nums,int k) {
         //Sliding window approach with Freq map
          Map<Integer,Integer> map = new HashMap<>();
-         int max_freq = 0; //highest frequency in current window
+         int max_freq = 0; //highest frequency of a element in current window
          int l=0;
          for(int r =0; r < nums.size(); r++){
              int el = nums.get(r);
@@ -37,10 +37,10 @@ public class FindLongestEqualSubArray {
          }
          return max_freq;
     }
-
+    //1,1,2,2,1,1
     public static Integer longestEqualSubArrayUsingBucketSort(List<Integer> nums, int k) {
         //Sliding window approach with Bucket sort
-        int[] count = new int[nums.size()+1]; // since the constraint is given that 1 <= nums[i] <= nums.length therefore we cna use such array
+        int[] count = new int[nums.size()+1]; // since the constraint is given that 1 <= nums[i] <= nums.length therefore we can use such array
         int maxFreq=0;
         for(int r=0, l=0; r < nums.size(); r++){
             int el = nums.get(r);

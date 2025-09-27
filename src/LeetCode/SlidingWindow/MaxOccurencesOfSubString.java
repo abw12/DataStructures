@@ -37,11 +37,9 @@ public class MaxOccurencesOfSubString {
 
             //substract the character going out of the window(left pointer charToRemove)
             char charToRemove = s.charAt(r-minSize);
-            if(distCharMap.containsKey(charToRemove)){
-                distCharMap.put(charToRemove,distCharMap.get(charToRemove)-1);
-                if(distCharMap.get(charToRemove) == 0)
-                    unqiueChar--;
-            }
+            distCharMap.put(charToRemove,distCharMap.get(charToRemove)-1);
+            if(distCharMap.get(charToRemove) == 0)
+                unqiueChar--;
 
             // fetch the substring now based on r-l+1
             if(unqiueChar <= maxLetters){
