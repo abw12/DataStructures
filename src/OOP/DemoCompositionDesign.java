@@ -77,7 +77,7 @@ final class SimplePricing  implements PricingPolicy{
 record Specifications(String brand,String model,Engine engine){
     //this is known as compact constructor introduced in java 17
     Specifications{
-        Objects.requireNonNull(brand); //we can directly use the parameter fields of the in compact constructor  instead of doing this.brand which will give the compile time error
+        Objects.requireNonNull(brand); //we can directly use the parameter fields in compact constructor instead of doing this.brand which will give the compile time error
         Objects.requireNonNull(model);
         Objects.requireNonNull(engine);
     }
@@ -128,6 +128,15 @@ final class Vehicle3 {
     }
 
     public Engine engine() { return engine; }
+
+    @Override
+    public String toString() {
+        return "Vehicle3{" +
+                "engine=" + engine +
+                ", brand='" + brand + '\'' +
+                ", model='" + model + '\'' +
+                '}';
+    }
 }
 
         /*Why this is powerful
@@ -169,8 +178,11 @@ public class DemoCompositionDesign {
                 new SimplePricing()
         );
 
+        Vehicle3 kiaEV = new Vehicle3("KIA","SONET"); //this will create an EV vehicle only since Vehicle3 is having strong owership with Electric Motors and it does not allow us to change the Engine from EV to Petrol at runtime(so its composition)
+
         System.out.println(skoda);
         System.out.println(triumph);
         System.out.println(tata);
+        System.out.println(kiaEV);
     }
 }
