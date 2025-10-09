@@ -1,0 +1,11 @@
+| GRASP Principle          | Example in code                                                              |
+| ------------------------ | ---------------------------------------------------------------------------- |
+| **Information Expert**   | `Ride`, `FareCalculator`, `DriverRepository`                                 |
+| **Creator**              | `RideService` creates `Ride` (since it aggregates both `Rider` and `Driver`) |
+| **Controller**           | `RideController`                                                             |
+| **Low Coupling**         | Each class talks only to what it needs                                       |
+| **High Cohesion**        | Classes have a single, focused responsibility                                |
+| **Polymorphism**         | You could later add `PaymentProcessor` subclasses (Card/UPI/Cash)            |
+| **Pure Fabrication**     | `NotificationService`                                                        |
+| **Indirection**          | `DriverRepository` sits between `RideService` and data layer                 |
+| **Protected Variations** | Interfaces (`Repository`, `Notifier`) protect against changes                |

@@ -60,6 +60,7 @@ final class ElectricMotor implements Engine{
 }
 
 interface PricingPolicy{
+
     BigDecimal priceFor(Specifications specs);
 }
 
