@@ -45,7 +45,7 @@ class SingletonLazy{
 
     private static  SingletonLazy singletonLazy ;
 
-    // check inside the constructor if an instance already exist of not since if using reflection api someone try to create
+    // check inside the constructor if an instance already exist or not since if using reflection api someone try to create
     // instance of the private class than it should be blocked
 //    reflection can break Singleton by bypassing access controls on constructors,
 //    but defensive coding in the constructor or using an enum-based Singleton can prevent this vulnerability
