@@ -11,7 +11,7 @@ public abstract class Profession implements Cloneable{
         Object clone =null;
 
         try{
-            clone=super.clone(); //shallow copy sinc ein java Object.clone method return a shallow copy
+            clone=super.clone(); //shallow copy since in java Object.clone method return a shallow copy
         }catch(CloneNotSupportedException e){
             //error will be thrown if the object which is trying to be cloned does not implement cloneable interface
             e.printStackTrace();
