@@ -61,24 +61,24 @@ public class User {
             this.lastName=lastName;
         }
 
-        public UserBuilder age(int age){
+        public UserBuilder withAge(int age){
             this.age=age;
             return this;
         }
 
-        public UserBuilder phnNumber(int phnNumber){
+        public UserBuilder withPhnNumber(int phnNumber){
             this.phnNumber=phnNumber;
             return this;
         }
 
-        public UserBuilder email(String email){
+        public UserBuilder withEmail(String email){
             this.email=email;
-            return  this;
+            return this;
         }
 
         public User build(){
-            User user =new User(this); //passing the current instance of the UserBuilder class
-            return user;
+            //passing the current instance of the UserBuilder class
+            return new User(this);
         }
 
     }
