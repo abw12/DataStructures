@@ -27,6 +27,8 @@ public final class  ImmutableClass {
 
 
     //Default private constructor will ensure no unplanned construction of class
+    //a private constructor is not strictly required to make a class immutable in Java,
+    // but it helps centralize and control object construction, which is sometimes desirable for advanced scenarios
     private ImmutableClass(String field1,Integer field2 ,Date date,Map<String,String> map){
         this.immutableField1=field1;
         this.immutabaleField2=field2;
@@ -76,3 +78,7 @@ public final class  ImmutableClass {
                 '}';
     }
 }
+/* NOTE::
+An immutable class is defined by all its fields being final and private, not exposing any setters or mutators,
+and not returning references to mutable internal objects. Public constructors are permitted in most immutable classes;
+this does not compromise immutability as long as state cannot be changed after construction.*/
