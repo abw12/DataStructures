@@ -47,14 +47,13 @@ public class LongestSubstring {
         }
         System.out.println("Longest Substring: " +max);
 
-        ///this solution is just giving the count of substring it will not return the actual substring itself
+        ///this solution is just giving the length of longest substring it will not return the actual substring itself
     }
 
 
     public static void main(String[] args) {
         String s="pwwekwmsab"; // o/p: 3
         checkSubstring(s);
-
     }
 
 
