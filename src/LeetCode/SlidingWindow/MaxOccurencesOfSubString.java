@@ -43,7 +43,7 @@ public class MaxOccurencesOfSubString {
 
             // fetch the substring now based on r-l+1
             if(unqiueChar <= maxLetters){
-                String subString = s.substring(r-minSize+1,r+1); //adding +1 since array is 0th index based and we are not keeping track of left pointer in this solution so calculating on the go the validfixed window size
+                String subString = s.substring(r-minSize+1,r+1); //adding +1 since array is 0th index based and we are not keeping track of left pointer in this solution so calculating on the go the valid fixed window size
                 freqmap.put(subString,freqmap.getOrDefault(subString,0)+1);
                 maxFreq=Math.max(maxFreq,freqmap.get(subString));
             }

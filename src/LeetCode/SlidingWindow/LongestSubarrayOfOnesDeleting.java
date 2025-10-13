@@ -26,7 +26,7 @@ public class LongestSubarrayOfOnesDeleting {
     }
 
     public static void main(String[] args) {
-        int[] nums = {1,1,1,1,1,1,1};
+        int[] nums = {1,1,1,1,1,1,0,0};
         System.out.println(longestSubArray(nums));
         // Output: 5, as we can delete one 0 to get the longest sub
 
