@@ -4,10 +4,9 @@ import static JavaConcurrency.ThreadColor.ANSI_GREEN;
 
 public class AnotherThread extends Thread{
 
-
     @Override
     public void run() {
-        System.out.println(ANSI_GREEN+ "Hello from "+currentThread().getName());
+        System.out.println(ANSI_GREEN + " Hello from "+currentThread().getName());
 
         try{
             Thread.sleep(5000);
@@ -19,4 +18,5 @@ public class AnotherThread extends Thread{
 
         System.out.println(ANSI_GREEN+ "Five seconds have passed I'm awake");
     }
+
 }

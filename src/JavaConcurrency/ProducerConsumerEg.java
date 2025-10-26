@@ -12,10 +12,10 @@ public class ProducerConsumerEg {
 
     public static void main(String[] args) {
         List<String> buffer =new ArrayList<String>();
-        //there is another way to make sure thread are synchronized other than using synchronized block of code is to l=use the reentrantlocks
-        //we have to manually lock and sure to unlock the code in ReentrantLock ,which rather being done by synchronized keyword automatically
-        //we can make use of try-finally block to make use of lock & unoock method so that we have to maintain the unlock at only one place
-        //also try-finally block make sure that if there is any intterference of thread or exception occured then it release the lock no matter what
+        //there is another way to make sure thread are synchronized other than using synchronized block of code is to use the reentrantlocks
+        //we have to manually lock and ensure to unlock the code in ReentrantLock, which rather being done by synchronized keyword automatically
+        //we can make use of try-finally block to make use of lock & unlock method so that we have to maintain the unlock at only one place
+        //also try-finally block make sure that if there is any interference of thread or exception occurred then it release the lock no matter what
         ReentrantLock bufferLock =new ReentrantLock();
         MyProducer producer =new MyProducer(buffer,ThreadColor.ANSI_RED,bufferLock);
         MyConsumer consumer1 = new MyConsumer(buffer,ThreadColor.ANSI_CYAN,bufferLock);
@@ -48,9 +48,9 @@ class MyProducer implements Runnable{
         for(String i : input){
             try{
                 System.out.println(color+"Adding..." + i);
-                //we required to add synchronized block on buffer since it is an aaralist which by nature is not a thread safe (means un-synchronized)
-                //therefore the mutiple thread can perform actions on it at the same time resulting in unexpected behaviour
-                //hence we have to synchronized the add and removing operation on arraylist to ensure that only on thread can perform CRUD operation on arraylist at a time
+                //we required to add synchronized block on buffer since it is an arraylist which by nature is not a thread safe (means un-synchronized)
+                //therefore the multiple thread can perform actions on it at the same time resulting in unexpected behaviour
+                //hence we have to synchronized the add and removing operation on arraylist to ensure that only one thread can perform CRUD operation on arraylist at a time
 //                synchronized (buffer){
                 bufferLock.lock();
                 try{
@@ -66,7 +66,7 @@ class MyProducer implements Runnable{
             }
         }
 
-        System.out.println(color + "Adding EOD and Exiting");
+        System.out.println(color + "Adding EOF and Exiting");
 //        synchronized (buffer){
            bufferLock.lock();
            try{
