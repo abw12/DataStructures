@@ -43,6 +43,6 @@ public class BasicThread {
         anotherThread.interrupt();
         System.out.println(ANSI_RED+ "Hello again from Main Thread !!");
 
-
     }
 }
+
