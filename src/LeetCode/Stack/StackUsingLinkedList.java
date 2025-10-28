@@ -83,8 +83,7 @@ class Main{
             String value = iterator.next();
             System.out.println(value);
         }
-
-
+        
         System.out.println("stack size: " + stack.size() );
 
     }
