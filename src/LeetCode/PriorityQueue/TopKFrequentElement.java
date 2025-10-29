@@ -24,7 +24,7 @@ public class TopKFrequentElement {
      /*   Each element in this array will be a List that stores Integer values.
           While you cannot directly create an array of a generic type, Java allows you to create an array of raw Lists and cast it to the parameterized type if needed.
           This is a common pattern for situations like bucket sort, where you often need an array of lists*/
-        List<Integer>[] bucket = new List[num.length+1]; //because while filling the frquncy the numbers starts from 1 and list is o index based
+        List<Integer>[] bucket = new List[num.length+1]; //+1 because while filling the frequency the numbers starts from 1 and list is o index based
         Map<Integer, Integer> freq = new HashMap<>();
         for (int i = 0; i < len; i++) {
             freq.put(num[i], freq.getOrDefault(num[i], 0) + 1);
@@ -69,7 +69,7 @@ public class TopKFrequentElement {
     }
 
     // Heap will only store k-size element in the minHeap
-    // both the PQ based approach uses the same Time but this approach is better on sapce complexity since we only keep k-size element in the heap
+    // both the PQ based approach uses the same Time but this approach is better on space complexity since we only keep k-size element in the heap
     private static int[] useMinKSizeHeap(int[] nums,int k){
         int[] result = new int[k];
         PriorityQueue<Node> minHeap = new PriorityQueue<>(Comparator.comparingInt(a -> a.freq)); //create a minHeap
