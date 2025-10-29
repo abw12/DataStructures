@@ -27,12 +27,5 @@ public class CountNumberofChar {
 
         System.out.println(characterCount);
         System.out.println(charCount);
-
-
-        ////////////////
-
-
-
-
     }
 }

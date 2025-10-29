@@ -68,7 +68,6 @@ public class HighestSalary {
 
         //dept wise most exp employee
         Map<String, EmplooyeeData> byExp=data.stream().collect(
-
                 toMap(EmplooyeeData::getDept, Function.identity(), BinaryOperator.maxBy(Comparator.comparingInt(EmplooyeeData::getYearsOfExp)))
                 );
         //onlygrouping by name
