@@ -2,6 +2,23 @@ package SortingAlgo;
 
 import java.util.Arrays;
 
+/*When to use
+
+Nearly sorted arrays (few inversions): runs close to O(n).
+
+Very small n (as a base case inside quick/merge/timsort).
+
+When you need stable and in-place behavior with tiny overhead.
+
+Complexity & traits
+
+Time: worst/avg O(n²), best O(n) (already sorted)
+
+Space: O(1)
+
+Stability: Stable
+
+Swaps: few (shifts are cheaper than swaps)*/
 public class InsertionSort {
 
     public static void sortAsc(int[] nums){
@@ -19,7 +36,6 @@ public class InsertionSort {
             }
         }
         System.out.println(Arrays.toString(nums));
-
     }
 
     public static void main(String[] args) {
