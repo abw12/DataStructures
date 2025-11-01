@@ -22,7 +22,6 @@ public class RemoveElement {
             }
         }
         return len;
-
     }
     public static void main(String[] args) {
         int[] input = {0,1,2,2,3,0,4,2};

@@ -47,7 +47,7 @@ class StackUsingOneQueue{
 public class MyStack {
 
     private static Queue<Integer> q1 = new LinkedList<>(); // we use LeetCode.LinkedList obj  with queue interface
-    // since queue remove() method pop element from front & arrayList remove() we have to give the index
+    // since linkedlist(queue) remove() method pop element from front & arrayList remove() we have to give the index
     private static Queue<Integer> q2 = new LinkedList<>();
     private int top;
 

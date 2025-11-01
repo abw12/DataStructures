@@ -44,7 +44,6 @@ public class BuyAndSellStock1 {
             if(pist > op ){
                 op=pist;
             }
-
         }
         return op;
     }
