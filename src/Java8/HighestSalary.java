@@ -2,10 +2,7 @@ package Java8;
 
 import Java8.StreamAPI.EmplooyeeData;
 
-import java.util.Comparator;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 import java.util.function.BinaryOperator;
 import java.util.function.Function;
 import java.util.stream.Collectors;
@@ -22,7 +19,14 @@ public class HighestSalary {
 
 
         //WAP to find highest salary of an employee from each dept
-        //approach 1
+//        approach 1
+        Map<String, Optional<EmplooyeeData>> maxBySalary = data.stream().collect(Collectors.groupingBy(
+                        EmplooyeeData::getDept,
+                        Collectors.maxBy(Comparator.comparingDouble(EmplooyeeData::getSalary))
+                )
+        );
+
+        //approach 2 ( the above Collectors.maxBy() method is doing the same thing below ie using the reducing method))
         Comparator<EmplooyeeData> comapareBySalary=Comparator.comparing(EmplooyeeData::getSalary);
         Map<String, Optional<EmplooyeeData>> employeeMap=data.stream().collect(
                 groupingBy(
@@ -32,9 +36,10 @@ public class HighestSalary {
         );
         System.out.println(employeeMap);
 
-        //aproach 2
+        //aproach 3
         Map<String,EmplooyeeData> employee2 = data.stream().collect(
-                toMap(EmplooyeeData::getDept, Function.identity(), BinaryOperator.maxBy(Comparator.comparingDouble(EmplooyeeData::getSalary)))
+                toMap(EmplooyeeData::getDept, Function.identity(),
+                        BinaryOperator.maxBy(Comparator.comparingDouble(EmplooyeeData::getSalary)))
         );
 
         //another simple example of the groupingBy collectors
@@ -78,7 +83,7 @@ public class HighestSalary {
                .filter(employee -> !employee.getName().startsWith("M"))
                .map(EmplooyeeData::getName).collect(Collectors.toList());
 
-       List<String>  empNames =  data.stream().filter(emp -> emp.getSalary() > 90000).map(emp -> emp.getName()).collect(Collectors.toList());
+       List<String>  empNames =  data.stream().filter(emp -> emp.getSalary() > 90000).map(EmplooyeeData::getName).toList();
 
         System.out.println(employee2);
         System.out.println("byExp :: "+ byExp);
@@ -88,6 +93,8 @@ public class HighestSalary {
         //sum of salary in dept dev
         Double sumOfSalaryInAllDept =data.stream().reduce(0.0,(partialValue,emp) -> partialValue + emp.getSalary() , Double::sum);
         System.out.println("Sum "+ sumOfSalaryInAllDept);
+        int maxYearsOfExpAcrossDept= data.stream().max(Comparator.comparingInt(EmplooyeeData::getYearsOfExp)).get().getYearsOfExp();
+        System.out.println("Max yrs of exp across dept :: "+ maxYearsOfExpAcrossDept);
 
         //Q) Given a list of Employee objects, create a Map where the key is the employee's department and the value is the number of employees
         // in that department.

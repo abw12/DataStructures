@@ -1,4 +1,4 @@
-package LeetCode.Array;
+package LeetCode.BinarySearch;
 
 public class FindPeakElement {
 

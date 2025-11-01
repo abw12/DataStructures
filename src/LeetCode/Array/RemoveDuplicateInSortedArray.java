@@ -8,7 +8,7 @@ public class RemoveDuplicateInSortedArray {
         int[] arr = {-2,-1,0,0,1,1,1,2,2,3,3,3,4};
 
 //        removeDuplicate(arr);
-//        removedups(arr); //using extra of creating a result array to store unique value
+//        removedups(arr); //using extra space of creating a result array to store unique value
         System.out.println(anotherWay(arr));
     }
 

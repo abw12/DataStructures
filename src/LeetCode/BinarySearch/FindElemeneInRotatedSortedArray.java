@@ -1,4 +1,4 @@
-package LeetCode.Array;
+package LeetCode.BinarySearch;
 
 class BinarySearch{
     //0,1,2,4,5,6,7
