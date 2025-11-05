@@ -8,7 +8,7 @@ public class MergeSort {
     public void conquer(int[] arr,int si, int mid,int ei){
         int[] mergedArray = new int[ei-si +1]; // new empty array to hold out merged list this is why merge sort take O(n) space complexity
 
-        int idx1 = si; //this index 1 will keep track of first part(lefy part ) of array while merging
+        int idx1 = si; //this index 1 will keep track of first part(left part ) of array while merging
         int idx2 = mid +1; //this index 2 will keep track of second part(right part) of array while merging
         int x=0;
 
@@ -39,7 +39,7 @@ public class MergeSort {
     }
 
 
-    //this divide approach takes O(logn) time
+    //this divide approach takes O(log n) time
     public void divide(int[] arr,int si, int ei){
         //base case for recursive will be
         if(si >= ei) //starting and ending index is same then return from that method
