@@ -3,18 +3,18 @@ package LeetCode.PriorityQueue;
 import java.util.*;
 
 
-/*class Pair<K,V>{
-    public final K key;
-    public final V value;
-    public Pair(K key,V value){
+/*class Pair<I,J>{
+    public final I key;
+    public final J value;
+    public Pair(I key,J value){
         this.key = key;
         this.value = value;
     }
 }*/
 //create the equals and hashcode method if using the above class otherwise it will not able to identify the duplicate
 
-// We can create a record in the Java 17 for the same purpose ( creating a custom Pair class like above)
-record Pair<K, V>(K key, V value) {}
+// We can create a record in the Java 17 for the same purpose (creating a custom Pair class like above)
+record Pair<I, J>(I idx1, J idx2) {}
 
 public class KthSmallestPairs {
 
@@ -53,15 +53,16 @@ public class KthSmallestPairs {
 
     // Time = O(k log m) where m is the size of nums1 and k is limit given is the question.
      // space = O(m)
-    // Treat the matrix of sums as a k-way merge problem. Always pop the current smallest sum and lazily push its “next” neighbours.
-    public List<List<Integer>> optimalSolution(int[] nums1, int[] nums2, int k){
+    // Treat the matrix of sums as a k-way merge problem.
+    // Always pop the current smallest sum and lazily push its “next” neighbours.
+    public static List<List<Integer>> optimalSolution(int[] nums1, int[] nums2, int k){
             int m=nums1.length;
             int n=nums2.length;
             List<List<Integer>> result = new ArrayList<>();
             //below comparingInt function is doing same as => (a,b) -> (nums1[a[0]] + nums2[a[1]]) - (nums1[b[0]] + nums2[b[1]])
            // (nums1[i] + nums2[j]) -(nums1[i] + nums2[j]) where a and b are two objects(int[] in PQ) compared.
            // example comparing indices (0,1) and (1,0) => 3 & 9 => 3-9 => -6, so it will be kept on top of the PQ. as we maintain minHeap
-            PriorityQueue<int[]> pq = new PriorityQueue<>(Comparator.comparingInt(a -> (nums1[a[0]] + nums2[a[1]])));
+            PriorityQueue<int[]> pq = new PriorityQueue<>(Comparator.comparingInt(a -> (nums1[a[0]] + nums2[a[1]]))); //this comparator is directly calculating the curr_sum instead of keeping the current_sum at 0th index like above method. both are doing the same thing
             // Create the first column of the matrix.
             //Each tuple stores indices (i, j) into the two arrays. The heap key is nums1[i] + nums2[j].
             for(int i = 0; i < Math.min(k,m); i++){ // only need k rows at most
@@ -91,7 +92,8 @@ public class KthSmallestPairs {
     public static void main(String[] args) {
         int[] nums1 = new int[]{1,2,4,5,6};
         int[] nums2 = new int[]{3,5,7,9};
-        int k = 20;
+        int k = 3;
         System.out.println( k + " Smallest sum of Pairs :: " + kSmallestPairs(nums1,nums2,k));
+        System.out.println( k + " Smallest sum of Pairs :: " + optimalSolution(nums1,nums2,k));
     }
 }
