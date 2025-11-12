@@ -38,7 +38,7 @@ public class KthLargestSmallesElement {
             minHeap.offer(arr[i]); //add only first k elements from input array into PQ
         }
 
-        //loop over from arr[k] to arr[n-1] and check on each element if it's greater than the peek of the queue
+        //loop over from arr[k] to arr[n-1] and check on each element if it's greater than the peek/head of the queue
         //if yes then remove the peek of the queue and add that element in the queue else just continue
         for(int i=k ; i < arr.length ; i++){
             if(!minHeap.isEmpty() && minHeap.peek() < arr[i]){

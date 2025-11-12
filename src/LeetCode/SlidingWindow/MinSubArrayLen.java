@@ -14,7 +14,7 @@ public class MinSubArrayLen {
         for(int r=0; r < len; r++){
             currSum+=nums[r];
             while(currSum >=target){
-                if(r-l+1 < minLen)
+                if(r-l+1 < minLen) //or simply use the minLen = Math.min(minLen,r-l+1); instead of if condition
                     minLen = r-l+1;
                 currSum-=nums[l];
                 l++;

@@ -31,8 +31,8 @@ public class SlidingWindowMaximum {
         return result;
     }
 
-    //optimal solution of this problem is using the deque ( double ended queue)
-    // the lgorithm is still sliding window although when solved using the deque data structure
+    //optimal solution of this problem is using the deque (double ended queue)
+    // the algorithm is still sliding window although when solved using the deque data structure
     // it is solved with optimal time o(n)
     //This technique is called a Monotonic Deque (because it keeps the elements in a monotonic, or sorted, order) and is a very powerful pattern.
     private static int[] optimalSolution(int[] nums, int k) {
@@ -44,7 +44,7 @@ public class SlidingWindowMaximum {
         Deque<Integer> q = new ArrayDeque<>();
 
         for(int i=0; i<n;i++){
-            while(!q.isEmpty() && q.peek() < i-k+1){ // remove out of window elements
+            while(!q.isEmpty() && q.peekFirst() < i - k + 1){ // remove out of window elements
                 q.poll();
             }
             // remove all smaller elements from right hand side of the deque
@@ -54,6 +54,7 @@ public class SlidingWindowMaximum {
                 q.pollLast();
             }
             q.offer(i);
+            //first fixed window size k-1 length, after first window keep adding the max value on each iteration to the result
             if(i >= k-1){
                 res[resi++] = nums[q.peek()];
             }
