@@ -9,6 +9,8 @@ public class TopKFrequentElement {
 
     //This solution is based on Bucket Sort technique.
     // This is Optimal solution with O(n) Time and O(n) Space
+    // int[] num ={1,2,2,4,5,6,6,7,8,8,8};
+    //        int k = 3;
     private static List<Integer> findTopKthElement(int[] num, int k) {
         int len = num.length;
 //        int[] output = new int[k];
