@@ -15,7 +15,7 @@ public class BasicPQExample {
     public static void main(String[] args) {
 
         //every insertion or deletion operation on priority queue internally performs an heapify operation on the heap (max or min heap)
-        //these reorder of the elements according to the heap(max or min) used in priority queue
+        //this reorder the elements according to the heap(max or min) used in priority queue
 
         //by default the Priority Queue in java uses the min. heap (therefore min value will remain at peek() front of queue)
         PriorityQueue<Integer> minHeap = new PriorityQueue<>();
