@@ -13,8 +13,7 @@ class UsingClassForName {
     String name = "GeeksForGeeks";
 
     // Main driver method
-    public static void main(String[] args)
-    {
+    public static void main(String[] args) {
         // Try block to check for exceptions
         try {
             //deprecated since java 9
@@ -27,6 +26,9 @@ class UsingClassForName {
 
             // Print and display
             System.out.println(obj.name);
+
+            //more modern way to use the reflection api to create an instance of the class
+
         }
 
         // Catch block to handle the exceptions

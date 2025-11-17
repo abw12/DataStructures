@@ -8,12 +8,17 @@ class Employee implements Serializable {
     private String name;
     private int no;
 
-    public void setName(String name){
-        this.name=name;
-    }
 
     public Employee(){
         System.out.println("public no-args constructor called...");
+    }
+    public Employee (String name){
+        this.name=name;
+        System.out.println("public parameterized constructor called...");
+    }
+
+    public void setName(String name){
+        this.name=name;
     }
 
     @Override
@@ -23,10 +28,7 @@ class Employee implements Serializable {
                 ", no=" + no +
                 '}';
     }
-    //    public Employee (String name){
-//        this.name=name;
-//        System.out.println("public parameterized constructor called...");
-//    }
+
 //
 //    private Employee(String name,int no){
 //        this.name=name;
@@ -44,10 +46,11 @@ public class UsingConstructorClassMethod {
     public static void main(String[] args) throws NoSuchMethodException {
 
         Constructor<Employee> constructor = Employee.class.getConstructor();
+
+
         try {
             Employee emp1 = constructor.newInstance();
-
-        } catch (InstantiationException e) {
+        } catch (InstantiationException  e) {
             throw new RuntimeException(e);
         } catch (IllegalAccessException e) {
             throw new RuntimeException(e);

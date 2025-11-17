@@ -56,7 +56,7 @@ public class TopKFrequentWord {
         for(int i = bucket.length-1; i > 0 && k > 0; i-- ){
             List<String> list = bucket[i];
             if(list != null){
-                Collections.sort(list); //sort the list to  maintian lexicographical order of same length words
+                Collections.sort(list); //sort the list to  maintain lexicographical order of same length words
                 for(String s : list){
                     if(k > 0){
                         result.add(s);

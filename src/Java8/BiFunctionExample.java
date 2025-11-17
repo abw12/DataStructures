@@ -9,7 +9,7 @@ import java.util.function.BinaryOperator;
 public class BiFunctionExample {
 
     //More practical use case of the BiFunction in the reduce method
-    //suppose we hvae a stream of products and cartsummary
+    //suppose we have a stream of products and cartsummary
     // --- Product Class (Our Stream Element Type: T) ---
     record Product(String name,int quantity, double price){}
     record CartSummary(int totalItems, double totalCost){}
@@ -27,7 +27,7 @@ public class BiFunctionExample {
 
         //BiFunction<CartSummary,Product,CartSummary>: accumulator function
         //This is where our BiFunction works on different types (CartSummary, Product)
-        // to produce a CartSummary
+        // to produce a result of CartSummary
         BiFunction<CartSummary, Product, CartSummary> accumulator =
                 (currentSummary, product) -> {
                     System.out.println("Accumulating: Current " + currentSummary.totalItems() + " items, " + String.format("%.2f", currentSummary.totalCost()) +
@@ -48,7 +48,7 @@ public class BiFunctionExample {
         };
 
         // use all these functional interfaces lambda function in the reduce method below to calculate the cartsummary
-        CartSummary finalCartSummary = products.stream().reduce(initialCartSummery,accumulator,combiner);
+        CartSummary finalCartSummary = products.parallelStream().reduce(initialCartSummery,accumulator,combiner);
         System.out.println("\nFinal Cart Summary: " + finalCartSummary);
 
         // in-line lambda function which can reduce the code size
@@ -86,7 +86,7 @@ public class BiFunctionExample {
         List<Float> list4 = Arrays.asList(20.9f,30f,27f); //when we mention f it specifically take float else it will consider decimal value as double
 
         //return type is another  diff data type
-        List<Boolean> result2 = listCombiner(list3,list4,(doubleNumber,floadtNumber) -> doubleNumber > floadtNumber);
+        List<Boolean> result2 = listCombiner(list3,list4,(doubleNumber,floatNumber) -> doubleNumber > floatNumber);
         System.out.println(result2);
 
         //use of BiFunction in the real-world scenario example with reduce method
