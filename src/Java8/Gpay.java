@@ -52,7 +52,7 @@ public class Gpay{
         System.out.println(numbers);
 
         //use flapmap() for one-to-many relations like in case of emails as emails are List<String> to get all emails in single format of list of string we can use flatmap
-        List<String> emails= employee.stream().flatMap(User -> User.getEmails().stream()).collect(Collectors.toList());
+        List<String> emails= employee.stream().flatMap(User -> User.getEmails().stream()).toList();
         System.out.println(emails);
 
         ///covert this emails again to List<List<String>>

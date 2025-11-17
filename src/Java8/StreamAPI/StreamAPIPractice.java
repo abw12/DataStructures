@@ -59,6 +59,13 @@ class Student {
 public class StreamAPIPractice {
 
     public static void main(String[] args) {
+
+
+        Map<String, Integer> inventory = new HashMap<>();
+        inventory.put("Apples", 50);
+        inventory.put("Bananas", 35);
+        inventory.put("Oranges", 60);
+
         List<Student> listOfStudents = Stream.of(
                 new Student("Abhishek","Science",80),
                 new Student("Abhishek","Math",85),
@@ -124,11 +131,14 @@ public class StreamAPIPractice {
 
         // create a supplier to form the random uuid strings
         Supplier<String> supplierIds = () -> UUID.randomUUID().toString();
+//        Random r = new Random();
+//        Supplier<Integer> randomNumber = () -> r.nextInt(1,100);
 
         // Function to convert the names to uppercase
         Function<String,String> functionUpperCase = name -> name.toUpperCase(); //can be changed to method reference
 
         //combine the random uuid and uppercase name using th BiFunction
+        //BiFunction<T,U,R> in below BiFunction the two operands ar eof same type string and return type is also same(string)
         BiFunction<String,String,String> combineFunc = (id,username) -> "UserID: " + id + " | Name: " + username;
 
         List<String> userNameWithUUID = userNameList.stream()
@@ -139,6 +149,32 @@ public class StreamAPIPractice {
                 })
                 .collect(Collectors.toList());
         System.out.println(userNameWithUUID);
+
+        //BiFunction another example with two different types of parameters and return type is of third type
+        BiFunction<String,Integer,Boolean> biF = (user, threshold) -> user.length() > threshold;
+        //since above BiFunction method return type is of boolean we can pass it in the filter method as well.
+        List<String> longNames = userNameList.stream().filter(user -> biF.apply(user, 6)).toList();
+        System.out.println("long names: " + longNames);
+
+        Function<Integer,Integer> fun = (a) -> a - 10;
+
+        System.out.println( fun.apply(30));
+
+        //void BiConsumer<T,U> accepts two input arguments and with no return result
+        //Map where Key (T) is String and Value (U) is Integer
+        //The lambda (name, quantity) -> { ... } implements the BiConsumer<String, Integer>
+        inventory.forEach((name,quantity) -> { //this is the Map.forEach method
+            // This code performs a side effect (printing) but returns nothing (void)
+            System.out.println("Checking item: " + name);
+            if (quantity < 40) {
+                System.out.println("-> Low stock alert for " + name + "! Only " + quantity + " left.");
+            } else {
+                System.out.println("-> Stock OK.");
+            }
+        });
+
+
+        // BiPredicate
 
         ////////////////////////////////////////////////////////
 
